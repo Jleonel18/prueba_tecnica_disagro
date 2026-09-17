@@ -5,7 +5,6 @@ export const ROUTES = {
   ITEMS: '/items',
   ITEM_DETALLE: '/items/:id',
   ASISTENCIAS: '/asistencias',
-  ASISTENCIA_NUEVA: '/asistencias/nueva',
   NOT_FOUND: '*',
 } as const;
 

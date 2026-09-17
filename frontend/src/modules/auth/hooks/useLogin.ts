@@ -3,28 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../routes';
 import { ApiError } from '../../../shared/api/httpClient';
 import { useAuth } from '../../../shared/auth/useAuth';
-import { registrarUsuario } from '../api/auth.api';
-import type { RegistrarUsuarioInput } from '../types/usuario';
+import { loginUsuario } from '../api/auth.api';
+import type { LoginInput } from '../types/usuario';
 
-export function useRegistro() {
+export function useLogin() {
   const navigate = useNavigate();
   const { login: guardarSesion } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function registrar(datos: RegistrarUsuarioInput): Promise<void> {
+  async function login(credenciales: LoginInput): Promise<void> {
     setLoading(true);
     setError(null);
     try {
-      const { token } = await registrarUsuario(datos);
+      const { token } = await loginUsuario(credenciales);
       guardarSesion(token);
       navigate(ROUTES.HOME);
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'No se pudo completar el registro');
+      setError(err instanceof ApiError ? err.message : 'No se pudo iniciar sesión');
     } finally {
       setLoading(false);
     }
   }
 
-  return { registrar, loading, error };
+  return { login, loading, error };
 }

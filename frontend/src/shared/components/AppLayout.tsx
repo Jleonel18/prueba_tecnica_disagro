@@ -1,7 +1,16 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes';
+import { useAuth } from '../auth/useAuth';
 
 export function AppLayout() {
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate(ROUTES.HOME);
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
       <header className="bg-white shadow">
@@ -9,7 +18,13 @@ export function AppLayout() {
           <Link to={ROUTES.HOME} className="font-bold">Disagro</Link>
           <Link to={ROUTES.ITEMS}>Items</Link>
           <Link to={ROUTES.ASISTENCIAS}>Asistencias</Link>
-          <Link to={ROUTES.LOGIN} className="ml-auto">Login</Link>
+          {isAuthenticated ? (
+            <button type="button" onClick={handleLogout} className="ml-auto">
+              Cerrar sesión
+            </button>
+          ) : (
+            <Link to={ROUTES.LOGIN} className="ml-auto">Login</Link>
+          )}
         </nav>
       </header>
       <main className="mx-auto max-w-5xl px-4 py-6">

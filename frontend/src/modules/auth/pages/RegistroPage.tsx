@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from 'react';
+import { type SubmitEvent as ReactSubmitEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../routes';
 import { AuthField } from '../components/AuthField';
@@ -12,7 +12,7 @@ export function RegistroPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit(event: FormEvent) {
+  function handleSubmit(event: ReactSubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     registrar({ nombre, apellidos, email, password });
   }
