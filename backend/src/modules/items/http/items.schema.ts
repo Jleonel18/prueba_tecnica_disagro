@@ -1,10 +1,9 @@
 import { BadRequestError } from '#shared/http/errors.js';
+import { esUuid } from '#shared/http/validators.js';
 import type { TipoItem } from '../domain/item.model.js';
 import type { ListarItemsFiltros } from '../domain/item.repository.js';
 
 const TIPOS_ITEM: readonly TipoItem[] = ['servicio', 'producto'];
-const UUID_REGEX =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function esTipoItem(valor: unknown): valor is TipoItem {
   return typeof valor === 'string' && (TIPOS_ITEM as readonly string[]).includes(valor);
@@ -43,7 +42,7 @@ export function parseListarItems(query: unknown): ListarItemsFiltros {
 }
 
 export function parseItemId(param: unknown): string {
-  if (typeof param !== 'string' || !UUID_REGEX.test(param)) {
+  if (!esUuid(param)) {
     throw new BadRequestError('Id de item inválido');
   }
   return param;

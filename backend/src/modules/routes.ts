@@ -2,10 +2,11 @@ import { Router } from 'express';
 import { usuariosRouter } from './usuarios/index.js';
 import { authRouter } from './auth/index.js';
 import { itemsRouter } from './items/index.js';
+import { asistenciasRouter } from './asistencias/index.js';
 
-// Único lugar que decide el prefijo público de cada módulo.
 export const apiRouter: Router = Router();
 
 apiRouter.use('/usuarios', usuariosRouter);
 apiRouter.use('/auth', authRouter);
 apiRouter.use('/items', itemsRouter);
+apiRouter.use('/asistencias', asistenciasRouter);
