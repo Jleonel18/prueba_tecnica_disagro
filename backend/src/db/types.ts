@@ -14,7 +14,7 @@ export interface ItemCatalogoRow {
   id: string;
   nombre: string;
   tipo: TipoItem;
-  precio: string; // numeric llega como string desde pg, no como number.
+  precio: string;
   created_at: Date;
   updated_at: Date;
 }
