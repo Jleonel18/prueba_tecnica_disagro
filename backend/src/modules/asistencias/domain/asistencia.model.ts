@@ -9,7 +9,9 @@ export interface Asistencia {
   updatedAt: Date;
 }
 
-export interface AsistenciaDetalle extends Asistencia {
+export interface Cotizacion {
   items: Item[];
   descuentos: ResumenDescuentos;
 }
+
+export interface AsistenciaDetalle extends Asistencia, Cotizacion {}

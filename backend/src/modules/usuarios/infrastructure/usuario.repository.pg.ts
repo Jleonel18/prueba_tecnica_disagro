@@ -30,15 +30,6 @@ function mapRow(row: UsuarioRow): Usuario {
 }
 
 export class UsuarioRepositoryPg implements UsuarioRepository {
-  async findByEmail(email: string): Promise<Usuario | null> {
-    const rows = await query<UsuarioRow>(
-      'SELECT * FROM usuarios WHERE email = $1',
-      [email],
-    );
-    const row = rows[0];
-    return row ? mapRow(row) : null;
-  }
-
   async findById(id: string): Promise<Usuario | null> {
     const rows = await query<UsuarioRow>(
       'SELECT * FROM usuarios WHERE id = $1',

@@ -1,10 +1,16 @@
 import type { Request, Response } from 'express';
 import { UnauthorizedError } from '#shared/http/errors.js';
 import type { AsistenciasService } from '../application/asistencias.service.js';
-import { parseConfirmarAsistencia } from './asistencias.schema.js';
+import { parseConfirmarAsistencia, parseCotizar } from './asistencias.schema.js';
 
 export class AsistenciasController {
   constructor(private readonly asistenciasService: AsistenciasService) {}
+
+  cotizar = async (req: Request, res: Response): Promise<void> => {
+    const { itemIds } = parseCotizar(req.body);
+    const cotizacion = await this.asistenciasService.cotizar(itemIds);
+    res.json(cotizacion);
+  };
 
   confirmar = async (req: Request, res: Response): Promise<void> => {
     if (!req.sesion) {

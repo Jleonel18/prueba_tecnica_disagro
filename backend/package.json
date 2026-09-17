@@ -2,9 +2,8 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --import tsx --conditions development --test \"src/**/*.test.ts\"",
     "dev": "tsx watch --conditions development src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
