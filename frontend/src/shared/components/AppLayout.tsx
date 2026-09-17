@@ -1,0 +1,20 @@
+import { Link, Outlet } from 'react-router-dom';
+import { ROUTES } from '../../routes';
+
+export function AppLayout() {
+  return (
+    <div className="min-h-screen bg-gray-100 text-gray-800">
+      <header className="bg-white shadow">
+        <nav className="mx-auto flex max-w-5xl items-center gap-6 px-4 py-3">
+          <Link to={ROUTES.HOME} className="font-bold">Disagro</Link>
+          <Link to={ROUTES.ITEMS}>Items</Link>
+          <Link to={ROUTES.ASISTENCIAS}>Asistencias</Link>
+          <Link to={ROUTES.LOGIN} className="ml-auto">Login</Link>
+        </nav>
+      </header>
+      <main className="mx-auto max-w-5xl px-4 py-6">
+        <Outlet />
+      </main>
+    </div>
+  );
+}
