@@ -1,3 +1,4 @@
+import { SearchInput } from '../../../shared/components/SearchInput';
 import type { Item } from '../../items/types/item';
 
 const precioFormatter = new Intl.NumberFormat('es-GT', {
@@ -17,6 +18,8 @@ interface ItemsSeleccionablesTableProps {
   disabled: boolean;
   loading: boolean;
   error: string | null;
+  busqueda: string;
+  onBusquedaChange: (value: string) => void;
 }
 
 export function ItemsSeleccionablesTable({
@@ -26,12 +29,20 @@ export function ItemsSeleccionablesTable({
   disabled,
   loading,
   error,
+  busqueda,
+  onBusquedaChange,
 }: ItemsSeleccionablesTableProps) {
   return (
     <div className="h-full rounded-xl border border-brand-300 bg-white shadow-md">
       <div className="border-b border-gray-200 px-6 py-4">
-        <h2 className="text-lg font-semibold text-brand-700">Servicios y productos</h2>
-        <p className="text-sm text-gray-500">Elige qué quieres aplicar a tu asistencia.</p>
+        <h2 className="mb-1 text-lg font-semibold text-brand-700">Servicios y productos</h2>
+        <p className="mb-4 text-sm text-gray-500">Elige qué quieres aplicar a tu asistencia.</p>
+        <SearchInput
+          value={busqueda}
+          onChange={onBusquedaChange}
+          placeholder="Buscar servicios y productos"
+          disabled={disabled}
+        />
       </div>
 
       {loading && <p className="px-6 py-4 text-sm text-gray-600">Cargando items…</p>}

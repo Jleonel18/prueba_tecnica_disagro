@@ -2,6 +2,7 @@ import { type SubmitEvent as ReactSubmitEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../routes';
 import { useAuth } from '../../../shared/auth/useAuth';
+import { useDebouncedValue } from '../../../shared/hooks/useDebouncedValue';
 import { useItems } from '../../items/hooks/useItems';
 import { AsistenciaResumenForm } from '../components/AsistenciaResumenForm';
 import { CotizacionResumen } from '../components/CotizacionResumen';
@@ -18,11 +19,18 @@ function fechaMinima(): string {
 export function AsistenciasPage() {
   const { isAuthenticated } = useAuth();
   const { asistencia, loading: cargandoAsistencia, error: errorAsistencia, recargar } = useMiAsistencia();
-  const { items, loading: cargandoItems, error: errorItems } = useItems();
   const { confirmar, loading: confirmando, error: errorConfirmar } = useConfirmarAsistencia();
 
   const [fechaBorrador, setFechaBorrador] = useState('');
   const [seleccionadosBorrador, setSeleccionadosBorrador] = useState<string[]>([]);
+  const [busqueda, setBusqueda] = useState('');
+  const busquedaDebounced = useDebouncedValue(busqueda);
+
+  const {
+    items,
+    loading: cargandoItems,
+    error: errorItems,
+  } = useItems({ q: busquedaDebounced || undefined });
 
   const yaConfirmada = asistencia !== null;
 
@@ -92,6 +100,8 @@ export function AsistenciasPage() {
             disabled={yaConfirmada}
             loading={cargandoItems}
             error={errorItems}
+            busqueda={busqueda}
+            onBusquedaChange={setBusqueda}
           />
         </div>
       </form>
