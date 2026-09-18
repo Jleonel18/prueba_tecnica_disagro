@@ -6,7 +6,6 @@ import disagroLogo from '/disagro.png';
 export function AppLayout() {
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
-
   function handleLogout() {
     logout();
     navigate(ROUTES.HOME);
@@ -19,14 +18,14 @@ export function AppLayout() {
           <Link to={ROUTES.HOME}>
             <img src={disagroLogo} alt="Disagro" className="h-10 w-auto" />
           </Link>
-          <Link to={ROUTES.ITEMS}>Items</Link>
+          <Link to={ROUTES.ITEMS}>Productos y servicios</Link>
           <Link to={ROUTES.ASISTENCIAS}>Asistencias</Link>
           {isAuthenticated ? (
             <button type="button" onClick={handleLogout} className="ml-auto">
               Cerrar sesión
             </button>
           ) : (
-            <Link to={ROUTES.LOGIN} className="ml-auto">Login</Link>
+            <Link to={ROUTES.LOGIN} className="ml-auto">Inicia Sesión</Link>
           )}
         </nav>
       </header>
@@ -36,3 +35,4 @@ export function AppLayout() {
     </div>
   );
 }
+

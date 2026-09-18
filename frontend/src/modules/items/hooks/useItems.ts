@@ -20,7 +20,7 @@ export function useItems(filtros: ListarItemsFiltros = {}) {
       })
       .catch((err) => {
         if (!cancelado) {
-          setError(err instanceof ApiError ? err.message : 'No se pudieron cargar los items');
+          setError(err instanceof ApiError ? err.message : 'No se pudieron cargar los productos y servicios');
         }
       })
       .finally(() => {

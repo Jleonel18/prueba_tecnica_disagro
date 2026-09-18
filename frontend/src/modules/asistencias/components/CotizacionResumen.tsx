@@ -29,7 +29,7 @@ export function CotizacionResumen({ descuentos }: CotizacionResumenProps) {
   if (!descuentos) {
     return (
       <div className="rounded-xl border border-dashed border-brand-300 bg-white p-6 text-center text-sm text-gray-500">
-        Selecciona items para ver el descuento aplicado.
+        Selecciona productos o servicios para ver el descuento aplicado.
       </div>
     );
   }
