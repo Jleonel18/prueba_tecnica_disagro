@@ -1,6 +1,7 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes';
 import { useAuth } from '../auth/useAuth';
+import disagroLogo from '/disagro.png';
 
 export function AppLayout() {
   const { isAuthenticated, logout } = useAuth();
@@ -15,7 +16,9 @@ export function AppLayout() {
     <div className="min-h-screen bg-gray-100 text-gray-800">
       <header className="bg-white shadow">
         <nav className="mx-auto flex max-w-5xl items-center gap-6 px-4 py-3">
-          <Link to={ROUTES.HOME} className="font-bold">Disagro</Link>
+          <Link to={ROUTES.HOME}>
+            <img src={disagroLogo} alt="Disagro" className="h-10 w-auto" />
+          </Link>
           <Link to={ROUTES.ITEMS}>Items</Link>
           <Link to={ROUTES.ASISTENCIAS}>Asistencias</Link>
           {isAuthenticated ? (

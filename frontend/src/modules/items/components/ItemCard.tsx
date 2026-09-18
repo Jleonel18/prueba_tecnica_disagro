@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-import { buildRoute } from '../../../routes';
 import type { Item } from '../types/item';
 
 const precioFormatter = new Intl.NumberFormat('es-GT', {
@@ -35,17 +33,9 @@ export function ItemCard({ item }: ItemCardProps) {
           <h4 className="text-md font-semibold text-gray-800">{item.nombre}</h4>
         </div>
 
-        <div className="flex items-center justify-between">
-          <span className="text-lg font-semibold text-brand-700">
-            {precioFormatter.format(item.precio)}
-          </span>
-          <Link
-            to={buildRoute.itemDetalle(item.id)}
-            className="rounded-lg bg-brand-500 px-3 py-1 text-sm text-white transition-colors hover:bg-brand-700"
-          >
-            Ver detalle
-          </Link>
-        </div>
+        <span className="text-lg font-semibold text-brand-700">
+          {precioFormatter.format(item.precio)}
+        </span>
       </div>
     </div>
   );
