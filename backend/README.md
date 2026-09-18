@@ -187,3 +187,14 @@ pnpm test      # tests unitarios
 pnpm build     # compila a dist/
 pnpm start     # ejecuta dist/index.js
 ```
+
+## Docker
+
+```bash
+docker build -t disagro-backend .
+docker run --rm --env-file .env -p 3000:3000 disagro-backend
+```
+
+Multi-stage ([Dockerfile](Dockerfile)): la etapa `build` compila con `pnpm build`; la de runtime instala solo dependencias de producción (`pnpm install --prod`) y corre como usuario `node` sin herramientas de compilación. `package.json` viaja también en runtime porque el campo `imports` resuelve los alias `#shared/*`, `#modules/*`, etc. contra `dist/`. El `.dockerignore` excluye `.env`, `node_modules` y `dist`.
+
+Para levantar backend + frontend juntos, ver [`docker-compose.yml`](../docker-compose.yml) en la raíz del repo.
