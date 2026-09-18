@@ -72,3 +72,18 @@ jobs:
           build-args: ${{ matrix.build_args }}
           cache-from: type=gha,scope=${{ matrix.service }}
           cache-to: type=gha,mode=max,scope=${{ matrix.service }}
+
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+    env:
+      HOOK_BACKEND: ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+      HOOK_FRONTEND: ${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}
+    steps:
+      - name: Deploy backend en Render
+        if: env.HOOK_BACKEND != ''
+        run: curl -fsS "${HOOK_BACKEND}&imgURL=ghcr.io/${GITHUB_REPOSITORY,,}-backend:${GITHUB_SHA}"
+
+      - name: Deploy frontend en Render
+        if: env.HOOK_FRONTEND != ''
+        run: curl -fsS "${HOOK_FRONTEND}&imgURL=ghcr.io/${GITHUB_REPOSITORY,,}-frontend:${GITHUB_SHA}"
