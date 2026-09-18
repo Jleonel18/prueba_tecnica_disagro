@@ -1,0 +1,58 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "node --import tsx --conditions development --test \"src/**/*.test.ts\"",
+    "dev": "tsx watch --conditions development src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:ping": "tsx --conditions development src/db/ping.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.4.2",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.4.2",
+  "type": "module",
+  "imports": {
+    "#config/*": {
+      "development": "./src/config/*",
+      "default": "./dist/config/*"
+    },
+    "#shared/*": {
+      "development": "./src/shared/*",
+      "default": "./dist/shared/*"
+    },
+    "#modules/*": {
+      "development": "./src/modules/*",
+      "default": "./dist/modules/*"
+    },
+    "#db/*": {
+      "development": "./src/db/*",
+      "default": "./dist/db/*"
+    }
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.5.1",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
