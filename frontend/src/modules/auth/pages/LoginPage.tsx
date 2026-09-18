@@ -4,6 +4,7 @@ import { ROUTES } from '../../../routes';
 import { AuthField } from '../components/AuthField';
 import { AuthLayout } from '../components/AuthLayout';
 import { useLogin } from '../hooks/useLogin';
+import disagroLogo from '/disagro.png';
 
 export function LoginPage() {
   const { login, loading, error } = useLogin();
@@ -17,6 +18,9 @@ export function LoginPage() {
 
   return (
     <AuthLayout title="Inicia Sesión">
+        <div className="mb-6 flex justify-center">
+          <img src={disagroLogo} alt="Disagro" className="h-10 w-auto" />
+        </div>
       <form onSubmit={handleSubmit}>
         <AuthField
           label="Your email"
